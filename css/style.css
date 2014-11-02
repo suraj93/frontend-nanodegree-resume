@@ -58,6 +58,7 @@ h2, h3, h4, h5 {
 }
 
 .location-text {
+  position: relative; 
   font-style: italic;
   font-size: 14px;
   color: #999999;
@@ -142,10 +143,23 @@ ul {
 
 
 .biopic {
+  position: relative;
   float: left;
   padding: 10px;
   width: 200px;
   display: none;
+}
+
+.expic{
+  float: right;
+  margin-top: 5px;
+  width: 60px;
+}
+
+.projectpic{
+  position: relative;
+  padding: 10px;
+  width: 400px;
 }
 
 img {
@@ -183,6 +197,9 @@ span {
   .biopic {
     width: 175px;
   }
+.expic {
+    width: 50px;
+  }
 }
 
 @media only screen and (max-width: 750px) {
@@ -192,6 +209,10 @@ span {
   .biopic {
     width: 150px;
   }
+  .expic {
+    width: 40px;
+  }
+
   .welcome-message {
     display: none;
   }
