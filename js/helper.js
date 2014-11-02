@@ -45,17 +45,20 @@ var HTMLprojectDescription = "<p><br>%data%</p>";
 var HTMLprojectImage = "<img src='%data%' class='projectpic'>";
 
 var HTMLschoolStart = "<div class='education-entry'></div>";
-var HTMLschoolName = "<a href='#'>%data%";
+var HTMLschoolName = "<a href='#'><b>%data%</b>";
 var HTMLschoolDegree = " -- %data%</a>";
 var HTMLschoolDates = "<div class='date-text'>%data%</div>";
 var HTMLschoolLocation = "<div class='location-text'>%data%</div>";
-var HTMLschoolMajor = "<em><br>Major: %data%</em>"
+var HTMLschoolGPA = "<p><br/>%data%</p>";
 
-var HTMLonlineClasses = "<h3>Online Classes</h3>";
-var HTMLonlineTitle = "<a href='#'>%data%";
+var HTMLschoolMajor = "<em><br>Major: %data%</em>";
+var HTMLschoolMinor = "<em><br>Minor: %data%</em>";
+
+var HTMLonlineClasses = "<div class='online-entry'><h3>Online Classes</h3></div>";
+var HTMLonlineTitle = "<a href='#'><b>%data%</b>";
 var HTMLonlineSchool = " - %data%</a>";
 var HTMLonlineDates = "<div class='date-text'>%data%</div>";
-var HTMLonlineURL = "<br><a href='#'>%data%</a>";
+var HTMLonlineURL = "<br><a href='%data'>%data%</a>";
 
 var internationalizeButton = "<button id=\"internationalize\">Internationalize</button>";
 var googleMap = "<div id='map'></div>";
@@ -166,6 +169,8 @@ function initializeMap() {
       title: name
     });
     
+
+      
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
@@ -175,7 +180,7 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      infoWindow.open(map,marker);
     });
 
     // this is where the pin actually gets added to the map.

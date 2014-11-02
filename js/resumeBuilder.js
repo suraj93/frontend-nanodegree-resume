@@ -1,5 +1,5 @@
 
-function displayBio(bio)
+/*function displayBio(bio)
 {
 	var formattedName=HTMLheaderName.replace("%data%",bio.myname);
 	var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
@@ -30,11 +30,7 @@ function displayBio(bio)
 	if (bio.skills)
 	{
 		$('#header').append(HTMLskillsStart);
-		/*for(i=0;i<bio.skills.length;i++)
-		{ 
-			formattedskills=HTMLskills.replace("%data%",bio.skills[i]);
-			$('#skills').append(formattedskills);
-		}*/
+		
 		formattedskills=HTMLskills.replace("%data%",bio.skills);
 		$('#skills').append(formattedskills);
 	}
@@ -46,37 +42,7 @@ function displayWork(work)
 	var formattedworkDates,formattedworkLocation,formattedworkDescription;
 	var job;
 
-	for (job_index in work.work)
-	{
-		job=work.work[job_index];
-
-		$('#workExperience').append(HTMLworkStart);
-		formattedworkEmployer=HTMLworkEmployer.replace("%data%",job.Employer);
-		formattedworkTitle=HTMLworkTitle.replace("%data%",job.Title);
-		formattedworkEmployerTitle = formattedworkEmployer+formattedworkTitle;
-
-		formattedworkDates=HTMLworkDates.replace("%data%",job.Dates);
-		formattedworkLocation=HTMLworkLocation.replace("%data%",job.location);
-		formattedworkDescription=HTMLworkDescription.replace("%data%",job.Description); 
-		formattedworkImage=HTMLworkImage.replace("%data%",job.Image); 
-
-		
-
-		$('.work-entry:last').append(formattedworkEmployerTitle);
-		$('.work-entry:last').append(formattedworkDates);
-		
-	
-		$('.work-entry:last').append(formattedworkLocation);	
-	
-		if(job.Image)
-				{
-					$('.work-entry:last').append(formattedworkImage);
-				}
-		$('.work-entry:last').append(formattedworkDescription);
-
-		}
-
-}
+}*/
 
 function locationizer(work)
 {
@@ -116,6 +82,46 @@ var bio={ "myname":"Surajkumar Harikumar","age":21,
 			"imgsrc":"images/p2.jpg"
 					};
 
+bio.display=function(){
+	var formattedName=HTMLheaderName.replace("%data%",bio.myname);
+	var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
+	$("#header").prepend(formattedRole);
+	$("#header").prepend(formattedName);
+
+	var formattedmobile=HTMLmobile.replace("%data%",bio.contacts.mobile);
+	var formattedemail=HTMLemail.replace("%data%",bio.contacts.email);
+	var formattedgithub=HTMLgithub.replace("%data%",bio.contacts.github);
+	var formattedlocation=HTMLlocation.replace("%data%",bio.contacts.location);
+	var formattedtwitter=HTMLtwitter.replace("%data%",bio.contacts.twitter);
+
+
+	$("#topContacts").append(formattedmobile);
+	$("#topContacts").append(formattedemail);
+	$("#topContacts").append(formattedgithub);
+	$("#topContacts").append(formattedtwitter);
+	$("#topContacts").append(formattedlocation);
+
+	var formattedBioPic=HTMLbioPic.replace("%data%",bio.imgsrc);
+	var formattedWelcomeMsg=HTMLWelcomeMsg.replace("%data%",bio.welcomeMessage);
+	var formattedskills=HTMLskills.replace("%data%",bio.skills);
+
+	$('#header').prepend(formattedBioPic);
+	$('#header').append(formattedWelcomeMsg);
+
+	var i,formattedskills;
+	if (bio.skills)
+	{
+		$('#header').append(HTMLskillsStart);
+		/*for(i=0;i<bio.skills.length;i++)
+		{ 
+			formattedskills=HTMLskills.replace("%data%",bio.skills[i]);
+			$('#skills').append(formattedskills);
+		}*/
+		formattedskills=HTMLskills.replace("%data%",bio.skills);
+		$('#skills').append(formattedskills);
+	}
+};
+
 cmu_work=["Design of LDPC codes to reduce total power used in data-centers, and for short distance communication.",
 			"Worked on the 'Design of Flexible TotEm-LDPC codes' project under Prof. Pulkit Grover (see <b>Projects</b> for more)."].join("<br/>");
 
@@ -135,7 +141,7 @@ var work={
 	"work":[
 			{"Employer":"Carnegie Mellon University",
 			"Title":"Summer Undergraduate Research Intern",
-			"Dates":"May-July 2014","location":"Pittsburgh, Pennsylvania, USA",
+			"Dates":"May-July 2014","location":"Pittsburgh, PA",
 			"Description":cmu_work,
 			"Image":0//"images/cmu.png"
 			},
@@ -160,6 +166,38 @@ var work={
 			]			
 };
 
+work.display=function(){
+	for (job_index in work.work)
+	{
+		job=work.work[job_index];
+
+		$('#workExperience').append(HTMLworkStart);
+		formattedworkEmployer=HTMLworkEmployer.replace("%data%",job.Employer);
+		formattedworkTitle=HTMLworkTitle.replace("%data%",job.Title);
+		formattedworkEmployerTitle = formattedworkEmployer+formattedworkTitle;
+
+		formattedworkDates=HTMLworkDates.replace("%data%",job.Dates);
+		formattedworkLocation=HTMLworkLocation.replace("%data%",job.location);
+		formattedworkDescription=HTMLworkDescription.replace("%data%",job.Description); 
+		formattedworkImage=HTMLworkImage.replace("%data%",job.Image); 
+
+		
+
+		$('.work-entry:last').append(formattedworkEmployerTitle);
+		$('.work-entry:last').append(formattedworkDates);
+		
+	
+		$('.work-entry:last').append(formattedworkLocation);	
+	
+		if(job.Image)
+				{
+					$('.work-entry:last').append(formattedworkImage);
+				}
+		$('.work-entry:last').append(formattedworkDescription);
+
+		}
+};
+
 
 var education={
 		"schools":[
@@ -168,12 +206,15 @@ var education={
 						"Degree":"B.Tech + M.Tech",
 						"Dates":"2011-2016","location":"Chennai, India",
 						"Major":"Electrical Engineering",
-						"Minor":"Operations Research"
+						"Minor":"Operations Research",
+						"GPA":"CGPA - 9.37"
 					},
 					{
 						"Name":"Padma Seshadri Bala Bhavan Sr. Sec School",
 						"Degree":"Middle School, High School",
-						"Dates":"1996-2011","location":"Chennai, India"
+						"Dates":"1996-2011","location":"Chennai, India",
+						"Major":"Physics, Chemistry, Computer Science, English, Math, Sanskrit",
+						"GPA":"National Board Exam Scores: Grade 12 - 97.6%, Grade 10 - 96.8% "
 					}
 		],
 		"onlineClasses":[
@@ -190,13 +231,64 @@ var education={
 			"URL":"https://www.udacity.com/course/progress#!/c-cs271"
 		},
 		{
-			"Title":"Machine Learning",
-			"School":"Udacity - Stanford",
+			"Title":"Computer Networks",
+			"School":"Coursera - Stanford",
+			"Dates":2014,
+			"URL":"https://www.udacity.com/course/progress#!/c-cs271"
+		},
+		{
+			"Title":"How to Start a Startup",
+			"School":"Y Combinator",
 			"Dates":2014,
 			"URL":"https://www.udacity.com/course/progress#!/c-cs271"
 		}
 		]	
-}
+};
+
+education.display=function(){
+	for(school_index in education.schools)
+	{
+		$('#education').append(HTMLschoolStart);
+		var formattedschoolName=HTMLschoolName.replace("%data%",education.schools[school_index].Name);
+		var formattedschoolDegree=HTMLschoolDegree.replace("%data%",education.schools[school_index].Degree);
+		var formattedschoolNameDegree = formattedschoolName + formattedschoolDegree;
+		var formattedschoolDates=HTMLschoolDates.replace("%data%",education.schools[school_index].Dates);
+		var formattedschoolLocation=HTMLschoolLocation.replace("%data%",education.schools[school_index].location);
+		var formattedschoolGPA=HTMLschoolGPA.replace("%data%",education.schools[school_index].GPA);
+		var formattedschoolMajor=HTMLschoolMajor.replace("%data%",education.schools[school_index].Major);
+		
+		$('.education-entry:last').append(formattedschoolNameDegree);
+		$('.education-entry:last').append(formattedschoolDates);
+		$('.education-entry:last').append(formattedschoolLocation);
+		$('.education-entry:last').append(formattedschoolGPA);
+		$('.education-entry:last').append(formattedschoolMajor);
+		if(education.schools[school_index].Minor)
+		{
+			var formattedschoolMinor=HTMLschoolMinor.replace("%data%",education.schools[school_index].Minor);
+			$('.education-entry:last').append(formattedschoolMinor);
+	
+		}
+		
+
+	}
+
+	$('#education').append(HTMLonlineClasses);
+	for(online_index in education.onlineClasses)
+	{
+		var formattedonlineTitle=HTMLonlineTitle.replace("%data%",education.onlineClasses[online_index].Title);
+		var formattedonlineSchool=HTMLonlineSchool.replace("%data%",education.onlineClasses[online_index].School);
+		var formattedonlineTitleSchool=formattedonlineTitle + formattedonlineSchool;
+		var formattedonlineDates=HTMLonlineDates.replace("%data%",education.onlineClasses[online_index].Dates);
+		var formattedonlineURL=HTMLonlineURL.replace("%data%",education.onlineClasses[online_index].URL);
+		
+		$('.online-entry:last').append(formattedonlineTitleSchool);
+		$('.online-entry:last').append(formattedonlineDates);
+		$('.online-entry:last').append('<br/>');
+		//$('.online-entry:last').append(formattedonlineURL);
+
+	}
+};
+
 
 cmu_description=["The goal of the project was to design of LDPC codes to reduce total power used in data-centers, and for short distance communication. The codes are designed to be energy-efficient at the decoder, and can scale between various power and energy requirements.",
 	"I developed a mathematical framework for measuring average change in degree distribution of the LDPC code from adding nodes, which closely mimics random addition. I used these ideas to design a scheme for flexible codes, which can scale-on-demand from low-energy to high-performance.",
@@ -236,7 +328,7 @@ var projects={
 
 
 	]
-}
+};
 
 projects.display=function(){
 	for(project_index in projects.projects)
@@ -262,13 +354,15 @@ projects.display=function(){
 	}
 };
 
+bio.display();
+work.display();
+education.display();
 projects.display();
+
+
 
 console.log(bio.skills);
 
-displayBio(bio)
-
-displayWork(work);
 
 $(document).click(function(loc){
 	var x=loc.pageX;
@@ -278,7 +372,6 @@ $(document).click(function(loc){
 
 console.log(locationizer(work));
 
-$('#main').append(internationalizeButton);
 
 
 $('#mapDiv').append(googleMap);
